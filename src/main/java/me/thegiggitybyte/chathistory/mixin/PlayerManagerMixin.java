@@ -18,12 +18,7 @@ import java.util.function.Function;
 @Mixin(PlayerManager.class)
 public class PlayerManagerMixin {
     
-    @Inject(method = "broadcast(Lnet/minecraft/text/Text;Ljava/util/function/Function;Lnet/minecraft/network/MessageType;Ljava/util/UUID;)V", at = @At("HEAD"))
-    public void cacheMessage(Text content, Function<ServerPlayerEntity, Text> messageFactory, MessageType type, UUID sender, CallbackInfo ci) {
-        ChatHistory.MESSAGE_CACHE.add(new ChatMessage(content, type, sender));
-    }
-    
-    @Inject(method = "broadcast(Lnet/minecraft/text/Text;Lnet/minecraft/network/MessageType;Ljava/util/UUID;)V", at = @At("HEAD"))
+    @Inject(method = "broadcastChatMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/MessageType;Ljava/util/UUID;)V", at = @At("HEAD"))
     public void cacheMessage(Text content, MessageType type, UUID sender, CallbackInfo ci) {
         ChatHistory.MESSAGE_CACHE.add(new ChatMessage(content, type, sender));
     }
